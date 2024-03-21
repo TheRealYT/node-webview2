@@ -27,7 +27,7 @@ public:
 	// Pointer to WebView window
 	wil::com_ptr <ICoreWebView2> webview;
 
-	void send(string eventName) {
+	void send(string eventName) const {
 		auto emitter = this->Value();
 		auto emitFunc = emitter.Get("emit").As<Napi::Function>();
 
@@ -37,6 +37,10 @@ public:
 private:
 	Napi::Reference<Napi::Value> thisObj;
 	HWND handle;
+
+	Napi::Value openDevTools(const Napi::CallbackInfo& info) {
+		return Boolean::New(info.Env(), SUCCEEDED(webview->OpenDevToolsWindow()));
+	}
 };
 
 HINSTANCE hInstance = GetModuleHandle(nullptr);
@@ -267,7 +271,13 @@ void InitializeWebView(HWND hWnd, BrowserWindow* bw, const function<void()> call
 }
 
 Napi::Function BrowserWindow::Init(Napi::Env env) {
-	Napi::Function constructor = DefineClass(env, "BrowserWindow", {});
+
+	Napi::Function constructor = DefineClass(env, "BrowserWindow",
+		{
+			InstanceMethod("openDevTools", &BrowserWindow::openDevTools)
+		}
+	);
+
 	return constructor;
 }
 
