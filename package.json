@@ -1,0 +1,19 @@
+{
+  "name": "webview2",
+  "version": "1.0.0",
+  "description": "NodeJS webview2 binding",
+  "gypfile": true,
+  "main": "index.js",
+  "scripts": {
+    "build": "node-gyp rebuild",
+    "build:32": "node-gyp rebuild --arch=ia32",
+    "clean": "node-gyp clean"
+  },
+  "keywords": [],
+  "author": "Yonathan Tesfaye <yt040448@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp": "^10.0.1"
+  }
+}
