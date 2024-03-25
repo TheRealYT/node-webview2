@@ -1,16 +1,22 @@
-const a = require('./build/Debug/webview2');
-require('node:util').inherits(a.BrowserWindow, require('node:events').EventEmitter);
+const fs = require('node:fs');
+const webview = require('./build/Debug/webview2');
 
-const x = new a.BrowserWindow('Hello');
-x.addListener('2', () => console.log('exit x'));
-x.addListener('web', () => console.log('web x'));
+require('node:util').inherits(webview.BrowserWindow, require('node:events').EventEmitter);
 
-const y = new a.BrowserWindow('Hello');
-y.addListener('2', () => console.log('exit y'));
-y.addListener('web', () => {
-    console.log('web y', y.openDevTools());
+const buf = fs.readFileSync('C:\\Users\\yt040\\Downloads\\resource_hacker\\help\\rh_icon.png');
+const browserWindow = new webview.BrowserWindow('Hello');
+
+browserWindow.addListener('2', () => console.log('Exit Window'));
+
+browserWindow.setRequestHandler((req, res) => {
+    console.log(req, res);
+    res.send(buf, 'image/png', 201, 'OK');
 });
 
-a.MessageLoop();
+browserWindow.addListener('web', () => {
+    console.log(browserWindow.addRequestFilter('*', 0));
+});
+
+webview.MessageLoop();
 
 console.log('Done');
