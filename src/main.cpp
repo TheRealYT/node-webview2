@@ -563,9 +563,7 @@ Value SetBrowserLocation(const CallbackInfo& info)
 	}
 
 	string dir = info[0].As<String>().Utf8Value();
-	wcout << "> " << BROWSER_DIR << endl;
 	BROWSER_DIR = wstring(dir.begin(), dir.end());
-	wcout << "> " << BROWSER_DIR.c_str() << endl;
 	return env.Undefined();
 }
 
