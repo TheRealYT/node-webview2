@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "NodeJS webview2 binding",
   "gypfile": true,
-  "main": "index.js",
+  "main": "./build/Debug/webview2",
   "scripts": {
     "build": "node-gyp rebuild",
     "build:32": "node-gyp rebuild --arch=ia32",
@@ -15,5 +15,6 @@
   "devDependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp": "^10.0.1"
-  }
+  },
+  "typings": "webview2.d.ts"
 }

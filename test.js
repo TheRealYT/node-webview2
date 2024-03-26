@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const webview = require('./build/Debug/webview2');
+const webview = require('.');
 
 require('node:util').inherits(webview.BrowserWindow, require('node:events').EventEmitter);
 
